@@ -3,7 +3,7 @@ import { Typography, Button , Modal, TextField} from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { Firestore } from 'firebase/firestore';
-import { collection,getDocs,query } from 'firebase/firestore';
+import { addDoc,collection,getDocs,query,doc , setDoc} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import {firestore} from '../firebase';
 export default function Home() {
@@ -12,8 +12,7 @@ export default function Home() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [itemName, setItemName]=useState('')
-  useEffect(() => {
-    const updatePantry = async () => {
+  const updatePantry = async () => {
     const snapshot=query(collection(firestore, 'pantry'))
     const docs= await getDocs(snapshot)
     const pantryList=[]
@@ -23,10 +22,14 @@ export default function Home() {
     console.log(pantryList)
     setPantry(pantryList)
     }
+  useEffect(() => {
     updatePantry()
   },[])
-  const addItem=(item) => {
-    console.log(item)
+  const addItem=async(item) => {
+    //await addDoc(collection(firestore, 'pantry'), { name: item });
+    const docRef = doc(collection(firestore, 'pantry'), item)
+    await setDoc(docRef,{})
+    updatePantry()
   }
   return (
   <Box 
@@ -64,8 +67,21 @@ export default function Home() {
             Add Item
           </Typography>
           <Stack width="100%" direction={'row'} spacing={2}>
-          <TextField id="outlined-basic" label="Item" variant="outlined" fullWidth />
-          <Button variant="outlined">Add</Button>
+          <TextField 
+          id="outlined-basic" 
+          label="Item" 
+          variant="outlined" 
+          fullWidth
+          value={itemName}
+          onChange={(e) => setItemName(e.target.value)}
+          />
+          <Button variant="outlined" 
+          onClick={()=>{
+            addItem(itemName)
+            setItemName('')
+            handleClose()
+          }}
+          >Add</Button>
           </Stack>
         </Box>
       </Modal> 
