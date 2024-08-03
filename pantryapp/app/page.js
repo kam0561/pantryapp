@@ -3,7 +3,7 @@ import { Typography, Button , Modal, TextField} from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { Firestore } from 'firebase/firestore';
-import { addDoc,collection,getDocs,query,doc , setDoc} from 'firebase/firestore';
+import { addDoc,collection,getDocs,query,doc , setDoc, docRef, deleteDoc} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import {firestore} from '../firebase';
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
     const docs= await getDocs(snapshot)
     const pantryList=[]
     docs.forEach((doc) =>{
-      pantryList.push(doc.id)
+      pantryList.push({name: doc.id, count:doc.data()})
     })
     console.log(pantryList)
     setPantry(pantryList)
@@ -26,10 +26,16 @@ export default function Home() {
     updatePantry()
   },[])
   const addItem=async(item) => {
-    //await addDoc(collection(firestore, 'pantry'), { name: item });
     const docRef = doc(collection(firestore, 'pantry'), item)
+    //Check if it exists
+    
     await setDoc(docRef,{})
-    updatePantry()
+    await updatePantry()
+  }
+  const removeItem=async(item) => {
+    const docRef = doc(collection(firestore, 'pantry'), item)
+    await deleteDoc(docRef)
+    await updatePantry()
   }
   return (
   <Box 
@@ -94,21 +100,25 @@ export default function Home() {
     </Box>
     <Stack width="800px" height="300px" spacing={2} overflow={'auto'} >
       {pantry.map((i)=>(
+        
         <Box 
         key={i}
         width="100%"
         minHeight="150px"
         display={'flex'}
-        justifyContent={'center'}
+        justifyContent={'space-between'}
         alignItems={'center'}
         bgcolor={'#f0f0f0'}
+        paddingX={5}
         >
           <Typography variant={'h3'} color={'#333'} textAlign={'center'}>
             {
               i.charAt(0).toUpperCase() + i.slice(1)
             }
           </Typography>
+        <Button variant='contained' onClick={()=> removeItem(i)}>Remove</Button>
         </Box>
+        //</Stack>
       ))}
     </Stack>
   </Box>
