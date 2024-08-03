@@ -105,14 +105,13 @@ export default function Home() {
           </Stack>
         </Box>
       </Modal> 
-    <Button variant="contained" color='success' onClick={handleOpen}>Add</Button>
     <Box border={'1px solid #333'}>
     <Box width="800px" height="100px" bgcolor={'#ADD8E6'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
     <Typography variant={'h2'} color={'#333'} textAlign={'center'}>
-      Pantry Items
+      PANTRY ITEMS
     </Typography>
     </Box>
-    <Stack width="800px" height="300px" spacing={2} overflow={'auto'} >
+    <Stack width="800px" height="500px" spacing={2} overflow={'auto'} >
       {pantry.map((item)=>(
         
         <Box 
@@ -125,20 +124,20 @@ export default function Home() {
         bgcolor={'#f0f0f0'}
         paddingX={5}
         >
-          <Typography variant={'h3'} color={'#333'} textAlign={'center'}>
+          <Typography variant={'h4'} color={'#333'} textAlign={'center'}>
             {
               item.name.charAt(0).toUpperCase() + item.name.slice(1)
             }
           </Typography>
-          <Typography variant={'h3'} color={'#333'} textAlign={'center'}>
+          <Typography variant={'h5'} color={'#333'} textAlign={'center'}>
             Quantity: {item.count}
           </Typography>
         <Button variant='contained' color='error' onClick={()=> removeItem(item.name)}>Remove</Button>
         </Box>
-        //</Stack>
       ))}
     </Stack>
   </Box>
+  <Button variant="contained" color='success' onClick={handleOpen}>Add</Button>
   </Box>
   )
 }
