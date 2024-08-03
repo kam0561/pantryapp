@@ -1,6 +1,19 @@
 {
+  "name": "pantryapp",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://kam0561.github.io/pantryapp",
   "dependencies": {
     "firebase": "^10.12.5",
     "reactfire": "^4.2.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
+
+
+
