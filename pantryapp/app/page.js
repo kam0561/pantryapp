@@ -3,22 +3,23 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { Firestore } from 'firebase/firestore';
-import { collection } from 'firebase/firestore';
-import { useEffect } from 'react';
+import { collection,getDocs,query } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import {firestore} from '../firebase';
-const item=[
-  'tomato',
-  'potato',
-  'onion',
-  'garlic',
-  'ginger',
-  'carrot',
-  'lettuce',
-  'cucumber',
-]
 export default function Home() {
+  const [pantry, setPantry]=useState([])
   useEffect(() => {
-    const snapshot=query(collection(firebase, 'pantry'))
+    const updatePantry = async () => {
+    const snapshot=query(collection(firestore, 'pantry'))
+    const docs= await getDocs(snapshot)
+    const pantryList=[]
+    docs.forEach((doc) =>{
+      pantryList.push(doc.id)
+    })
+    console.log(pantryList)
+    setPantry(pantryList)
+    }
+    updatePantry()
   },[])
   return (
   <Box 
@@ -37,11 +38,11 @@ export default function Home() {
     </Typography>
     </Box>
     <Stack width="800px" height="300px" spacing={2} overflow={'auto'} >
-      {item.map((i)=>(
+      {pantry.map((i)=>(
         <Box 
         key={i}
         width="100%"
-        height="300px"
+        minHeight="300px"
         display={'flex'}
         justifyContent={'center'}
         alignItems={'center'}
