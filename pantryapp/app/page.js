@@ -1,5 +1,5 @@
 "use client";
-import { Typography, Button , Modal} from '@mui/material';
+import { Typography, Button , Modal, TextField} from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { Firestore } from 'firebase/firestore';
@@ -11,6 +11,7 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [itemName, setItemName]=useState('')
   useEffect(() => {
     const updatePantry = async () => {
     const snapshot=query(collection(firestore, 'pantry'))
@@ -24,6 +25,9 @@ export default function Home() {
     }
     updatePantry()
   },[])
+  const addItem=(item) => {
+    console.log(item)
+  }
   return (
   <Box 
   width="100vw" 
@@ -47,19 +51,22 @@ export default function Home() {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '400px',
-          height: '200px',
           bgcolor: 'background.paper',
           border: '2px solid #000',
           boxShadow: 24,
           p: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3,
         }}
 >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Add Item
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <Stack width="100%" direction={'row'} spacing={2}>
+          <TextField id="outlined-basic" label="Item" variant="outlined" fullWidth />
+          <Button variant="outlined">Add</Button>
+          </Stack>
         </Box>
       </Modal> 
     <Button variant="contained" onClick={handleOpen}>Add</Button>
