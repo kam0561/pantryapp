@@ -19,13 +19,16 @@ export default function Home() {
   display={'flex'}
   justifyContent={'center'}
   alignItems={'center'}
+  flexDirection={'column'}
+  
   >
-    <Box width="800px" height="100px" bgcolor={'#f0f0f0'}>
+    <Box border={'1px solid #333'}>
+    <Box width="800px" height="100px" bgcolor={'#ADD8E6'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
     <Typography variant={'h2'} color={'#333'} textAlign={'center'}>
       Pantry Items
     </Typography>
     </Box>
-    <Stack width="800px" height="300px" spacing={2} overflow={'auto'}>
+    <Stack width="800px" height="300px" spacing={2} overflow={'auto'} >
       {item.map((i)=>(
         <Box 
         key={i}
@@ -44,6 +47,7 @@ export default function Home() {
         </Box>
       ))}
     </Stack>
+  </Box>
   </Box>
   )
 }
