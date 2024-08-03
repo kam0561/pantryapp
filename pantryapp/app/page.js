@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 const item=[
   'tomato',
   'potato',
@@ -15,7 +16,22 @@ export default function Home() {
   display={'flex'}
   justifyContent={'center'}
   alignItems={'center'}
-  >Hello World
+  >
+    <Stack width="800px" height="600px" spacing={2}>
+      {item.map((i)=>(
+        <Box 
+        key={i}
+        width="100%"
+        height="100px"
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        bgcolor={'#f0f0f0'}
+        >
+          {i}
+        </Box>
+      ))}
+    </Stack>
   </Box>
   )
 }
