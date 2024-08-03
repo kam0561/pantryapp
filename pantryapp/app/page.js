@@ -1,5 +1,5 @@
 "use client";
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { Firestore } from 'firebase/firestore';
@@ -32,6 +32,7 @@ export default function Home() {
   
   >
     <Box border={'1px solid #333'}>
+    <Button variant="contained">Contained</Button>
     <Box width="800px" height="100px" bgcolor={'#ADD8E6'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
     <Typography variant={'h2'} color={'#333'} textAlign={'center'}>
       Pantry Items
