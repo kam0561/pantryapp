@@ -1,6 +1,11 @@
+"use client";
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { Firestore } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
+import { useEffect } from 'react';
+import {firestore} from '../firebase';
 const item=[
   'tomato',
   'potato',
@@ -12,6 +17,9 @@ const item=[
   'cucumber',
 ]
 export default function Home() {
+  useEffect(() => {
+    const snapshot=query(collection(firebase, 'pantry'))
+  },[])
   return (
   <Box 
   width="100vw" 
