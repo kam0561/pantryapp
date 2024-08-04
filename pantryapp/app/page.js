@@ -165,12 +165,12 @@ export default function Home() {
           </Button>
         </Stack>
 
-        <Stack width="800px" height="500px" spacing={2} overflow={'auto'} bgcolor={'#b2b2b2'}>
+        <Stack width="800px" height="450px" spacing={2} overflow={'auto'} bgcolor={'#b2b2b2'}>
           {pantry.map((item) => (
             <Box 
               key={item.name}
               width="100%"
-              minHeight="150px"
+              minHeight="100px"
               display={'flex'}
               justifyContent={'space-between'}
               alignItems={'center'}
