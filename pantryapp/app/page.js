@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 import { firestore } from '../firebase';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Home() {
   const [pantry, setPantry] = useState([]);
@@ -79,6 +82,7 @@ export default function Home() {
       alignItems={'center'}
       flexDirection={'column'}
       gap={2}
+      bgcolor={'#ffffff'}
     >
       <Modal
         open={open}
@@ -133,12 +137,12 @@ export default function Home() {
         <Box 
           width="800px" 
           height="100px" 
-          bgcolor={'#ADD8E6'} 
+          bgcolor={'#36454f'}
           display={'flex'} 
           justifyContent={'center'} 
           alignItems={'center'}
         >
-          <Typography variant={'h2'} color={'#333'} textAlign={'center'}>
+          <Typography variant={'h3'} color={'#ffffff'} textAlign={'center'} >
             PANTRY ITEMS
           </Typography>
         </Box>
@@ -154,13 +158,14 @@ export default function Home() {
           <Button 
             variant="contained" 
             color="primary" 
+            startIcon={<SearchIcon />}
             onClick={handleSearch}
           >
             Search
           </Button>
         </Stack>
 
-        <Stack width="800px" height="500px" spacing={2} overflow={'auto'}>
+        <Stack width="800px" height="500px" spacing={2} overflow={'auto'} bgcolor={'#b2b2b2'}>
           {pantry.map((item) => (
             <Box 
               key={item.name}
@@ -172,20 +177,18 @@ export default function Home() {
               bgcolor={'#f0f0f0'}
               paddingX={5}
             >
-              <Typography variant={'h4'} color={'#333'} textAlign={'center'}>
+              <Fab color="primary" aria-label="add" 
+                  onClick={() => addItem(item.name)}
+                >
+                 <AddIcon />
+                </Fab>
+              <Typography variant={'h5'} color={'#333'} textAlign={'center'}>
                 {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
               </Typography>
-              <Typography variant={'h5'} color={'#333'} textAlign={'center'}>
+              <Typography variant={'h6'} color={'#333'} textAlign={'center'}>
                 Quantity: {item.count}
               </Typography>
               <Stack direction="row" spacing={1}>
-                <Button 
-                  variant='contained' 
-                  color='primary' 
-                  onClick={() => addItem(item.name)}
-                >
-                  +
-                </Button>
                 <Button 
                   variant='contained' 
                   color='error' 
