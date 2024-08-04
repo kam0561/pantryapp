@@ -133,12 +133,13 @@ export default function Home() {
           <Typography variant={'h5'} color={'#333'} textAlign={'center'}>
             Quantity: {item.count}
           </Typography>
+          <Button variant='contained' color='primary' onClick={() => addItem(item.name)}>+</Button>
         <Button variant='contained' color='error' onClick={()=> removeItem(item.name)}>Remove</Button>
         </Box>
       ))}
     </Stack>
   </Box>
-  <Button variant="contained" color='success' onClick={handleOpen}>Add</Button>
+  <Button variant="contained" color='success' onClick={handleOpen}>Add Item</Button>
   </Box>
   )
 }
