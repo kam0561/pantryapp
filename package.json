@@ -5,6 +5,7 @@
   "homepage": "https://kam0561.github.io/pantryapp",
   "dependencies": {
     "firebase": "^10.12.5",
+    "react-scripts": "^5.0.1",
     "reactfire": "^4.2.3"
   },
   "scripts": {
@@ -12,8 +13,8 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
-
-
-
