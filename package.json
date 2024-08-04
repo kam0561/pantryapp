@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://kam0561.github.io/pantryapp",
   "dependencies": {
+    "@mui/icons-material": "^5.16.6",
     "firebase": "^10.12.5",
     "react-scripts": "^3.0.1",
     "reactfire": "^4.2.3"

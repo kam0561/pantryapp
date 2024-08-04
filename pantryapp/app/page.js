@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 import { collection, getDocs, query, doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { firestore } from '../firebase';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function Home() {
   const [pantry, setPantry] = useState([]);
@@ -141,7 +143,7 @@ export default function Home() {
           </Typography>
         </Box>
 
-        <Stack width="800px" direction="row" spacing={2} mb={2}>
+        <Stack width="800px" direction="row" spacing={2} mb={2} paddingTop={2}>
           <TextField
             label="Search Item"
             variant="outlined"
@@ -188,6 +190,7 @@ export default function Home() {
                   variant='contained' 
                   color='error' 
                   onClick={() => removeItem(item.name)}
+                  startIcon={<DeleteIcon />}
                 >
                   Remove
                 </Button>
@@ -198,7 +201,7 @@ export default function Home() {
       </Box>
 
       <Button variant="contained" color='success' onClick={handleOpen}>
-        Add Item
+      <AddShoppingCartIcon/> Add Item  
       </Button>
     </Box>
   );
