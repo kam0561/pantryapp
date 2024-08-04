@@ -95,7 +95,8 @@ export default function Home() {
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
           />
-          <Button variant="outlined" 
+          <Button variant="contained" 
+          color='success'
           onClick={()=>{
             addItem(itemName)
             setItemName('')
